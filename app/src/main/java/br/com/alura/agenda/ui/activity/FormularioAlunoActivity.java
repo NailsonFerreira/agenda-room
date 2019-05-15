@@ -32,7 +32,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario_aluno);
         AgendaDatabase database = AgendaDatabase.getInstance(this);
 
-        AlunoDAO dao = database.getRoomAlunoDAO();
+        dao = database.getRoomAlunoDAO();
         inicializacaoDosCampos();
         carregaAluno();
     }
@@ -67,9 +67,9 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void preencheCampos() {
         campoNome.setText(aluno.getNome());
+        campoSobrenome.setText(aluno.getSobrenome());
         campoTelefone.setText(aluno.getTelefone());
         campoEmail.setText(aluno.getEmail());
-        campoSobrenome.setText(aluno.getSobrenome());
     }
 
     private void finalizaFormulario() {
