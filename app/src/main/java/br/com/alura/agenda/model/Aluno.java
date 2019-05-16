@@ -1,11 +1,12 @@
 package br.com.alura.agenda.model;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Entity
 public class Aluno implements Serializable {
@@ -14,19 +15,21 @@ public class Aluno implements Serializable {
     private int id = 0;
     private String nome;
     private String sobrenome;
-    private String telefone;
+    private String telefoneCelular;
+    private String telefoneFixo;
+
+    public String getTelefoneFixo() {
+        return telefoneFixo;
+    }
+
+    public void setTelefoneFixo(String telefoneFixo) {
+        this.telefoneFixo = telefoneFixo;
+    }
+
     private String email;
+    private Calendar momentoCadastro = Calendar.getInstance();
 
-    @Ignore
-    public Aluno(String nome, String telefone, String email) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
-    }
 
-    public Aluno() {
-
-    }
 
 
     public void setNome(String nome) {
@@ -37,12 +40,16 @@ public class Aluno implements Serializable {
         this.sobrenome = sobrenome;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setMomentoCadastro(Calendar momentoCadastro) {
+        this.momentoCadastro = momentoCadastro;
     }
 
     public String getNome() {
@@ -53,18 +60,22 @@ public class Aluno implements Serializable {
         return sobrenome;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneCelular() {
+        return telefoneCelular;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public Calendar getMomentoCadastro() {
+        return momentoCadastro;
+    }
+
     @NonNull
     @Override
     public String toString() {
-        return nome + " - " + telefone;
+        return nome + " - " + telefoneCelular;
     }
 
     public void setId(int id) {
@@ -81,5 +92,10 @@ public class Aluno implements Serializable {
 
     public String getNomeCompleto(){
         return nome + " " + sobrenome;
+    }
+
+    public String dataFormatada(){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(momentoCadastro.getTime());
     }
 }
